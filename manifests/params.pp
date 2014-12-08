@@ -8,7 +8,7 @@ class openldap::params {
     $base           = undef
     $tls_cacert     = undef
     $tls_cacertdir  = undef
-    $tls_reqcert    = false
+    $tls_reqcert    = 'demand'
 
 }
 

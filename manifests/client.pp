@@ -14,7 +14,7 @@ class openldap::client (
     validate_string($base)
     if ($tls_cacert) { validate_absolute_path($tls_cacert) }
     if ($tls_cacertdir) { validate_absolute_path($tls_cacertdir) }
-    validate_bool($tls_reqcert) }
+    validate_string($tls_reqcert)
 
     package { 'openldap':
         ensure => 'present'
