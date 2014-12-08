@@ -25,5 +25,5 @@ BASE <%= @base %>
 <% if @tls_reqcert -%>
 <% if @tls_cacert -%>TLS_CACERT <%= @tls_cacert %><% end -%>
 <% if @tls_cacertdir -%>TLS_CACERTDIR <%= @tls_cacertdir %><% end -%>
-TLS_REQCERT @tls_reqcert
+TLS_REQCERT <%= @tls_reqcert %>
 <% end -%>
