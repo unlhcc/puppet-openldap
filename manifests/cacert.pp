@@ -9,6 +9,11 @@ define openldap::cacert (
     $ensure         = 'present',
 ) {
 
+    # sssd loads certs on startup
+    if defined(Service['sssd']) {
+        $cert_notify = [ Service['sssd'] ]
+    }
+
     file { "${tls_cacertdir}/${name}.crt":
         ensure  => $ensure,
         owner   => 'root',
@@ -16,6 +21,7 @@ define openldap::cacert (
         mode    => '0644',
         content => $cert,
         require => File[$tls_cacertdir],
+        notify  => $cert_notify,
     }
 
     $link_state = $ensure ? { default => 'link', 'absent' => 'absent' }
@@ -24,7 +30,7 @@ define openldap::cacert (
         ensure => $link_state,
         target => "${name}.crt",
         require => File[$tls_cacertdir],
+        notify  => $cert_notify,
     }
 
 }
-
