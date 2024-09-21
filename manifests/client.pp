@@ -10,14 +10,9 @@ class openldap::client (
     $tls_reqcert    = $openldap::params::tls_reqcert,
 ) inherits openldap::params {
 
-    validate_string($uri)
-    validate_string($base)
-    if ($tls_cacert) { validate_absolute_path($tls_cacert) }
     if ($tls_cacertdir) {
-        validate_absolute_path($tls_cacertdir)
         file { $tls_cacertdir: ensure => "directory", }
     }
-    validate_string($tls_reqcert)
 
     package { 'openldap':
         ensure => 'present'
